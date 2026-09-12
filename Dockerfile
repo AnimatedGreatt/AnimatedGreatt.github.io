@@ -13,5 +13,5 @@ RUN npm install --production
 ENV NODE_ENV=production
 EXPOSE 3000
 
-# Start the Express server (server.js serves static files from ../legobeerus.github.io)
+# Start the Express server (server.js serves static files from ../animatedgreatt.github.io)
 CMD ["node","server.js"]
