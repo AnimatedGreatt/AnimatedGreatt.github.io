@@ -36,6 +36,18 @@ let siteRoot = null;
 // Configure cookie security based on BASE_URL protocol
 const isSecure = (BASE_URL||'').startsWith('https');
 
+// Where the static site lives. After login/logout, send people back there instead of to this server.
+// Empty locally, where this server also serves the site.
+const SITE_URL = String(process.env.SITE_URL || (isSecure ? 'https://agent-os.team' : '')).replace(/\/+$/, '');
+const SESSION_MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000;
+
+// Only allow same-site relative paths as post-login destinations (no open redirects)
+function siteRedirectUrl(next){
+  const p = String(next || '/');
+  const safePath = p.startsWith('/') && !p.startsWith('//') && !p.startsWith('/\\') ? p : '/';
+  return `${SITE_URL}${safePath}`;
+}
+
 // Try to use Postgres-backed session store when DATABASE_URL is provided (Railway)
 const envDatabaseUrl = process.env.DATABASE_URL;
 const DATABASE_URL = envDatabaseUrl;
@@ -262,7 +274,9 @@ dbInitPromise.then(()=>{
     secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: isSecure, sameSite: isSecure ? 'none' : 'lax' }
+    // Persistent cookie so logins survive closing the browser; rolling renews it on each visit
+    rolling: true,
+    cookie: { secure: isSecure, sameSite: isSecure ? 'none' : 'lax', maxAge: SESSION_MAX_AGE_MS }
   }));
 
   // Enable CORS for the static site origin so the frontend can call /api endpoints
@@ -418,7 +432,7 @@ function startApp(){
         }catch(e){ console.warn('Failed to upsert user', e && e.message) }
       }
 
-      const dest = (req.session && req.session.next) ? req.session.next : '/';
+      const dest = siteRedirectUrl(req.session && req.session.next);
       return res.redirect(dest);
     }catch(err){ console.error('OAuth callback failure', err); return res.status(500).send('OAuth failure'); }
   });
@@ -498,8 +512,8 @@ function startApp(){
   });
 
   app.get('/logout', (req, res)=>{
-    if(req.session) req.session.destroy(()=>{ res.redirect('/'); });
-    else res.redirect('/');
+    if(req.session) req.session.destroy(()=>{ res.redirect(siteRedirectUrl('/')); });
+    else res.redirect(siteRedirectUrl('/'));
   });
 
   function toText(value){

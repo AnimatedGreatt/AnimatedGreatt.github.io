@@ -97,8 +97,9 @@
   function createLoginButton(){
     const a = document.createElement('a')
     a.className = 'btn btn-primary'
-    // Redirect back to site root after OAuth to avoid cross-origin next URLs causing 404.
-    a.href = `${AUTH_SERVER}/auth/discord?next=/`
+    // Return to the current page after OAuth; the server only accepts relative paths.
+    const next = window.location.pathname + window.location.search
+    a.href = `${AUTH_SERVER}/auth/discord?next=${encodeURIComponent(next)}`
     a.textContent = 'Login'
     return a
   }
