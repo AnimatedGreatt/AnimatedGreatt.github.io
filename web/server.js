@@ -266,7 +266,7 @@ dbInitPromise.then(()=>{
   }));
 
   // Enable CORS for the static site origin so the frontend can call /api endpoints
-  const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || 'https://animatedgreatt.github.io';
+  const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || 'https://agent-os.team';
   app.use(cors({ origin: ALLOWED_ORIGIN, credentials: true }));
 
   // If BASE_URL is HTTPS (production behind a proxy like Railway), enable trust proxy
