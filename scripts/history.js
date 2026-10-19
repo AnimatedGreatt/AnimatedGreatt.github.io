@@ -95,7 +95,7 @@
     items.forEach(item=>{
       const a = document.createElement('a')
       a.className = 'dashboard-card'
-      a.href = `grade.html?session=${encodeURIComponent(item.id)}&view=archive`
+      a.href = `grade?session=${encodeURIComponent(item.id)}&view=archive`
 
       const info = cardData(item)
       a.innerHTML = `

@@ -126,7 +126,7 @@
       const latest = warrants[0] || {}
       const card = document.createElement('a')
       card.className = 'dashboard-card aos-person-card'
-      card.href = `aos-profile.html?username=${encodeURIComponent(group.username)}`
+      card.href = `aos-profile?username=${encodeURIComponent(group.username)}`
       card.innerHTML = `
         <div class="dashboard-card__top">
           <span class="dashboard-card__badge">${warrants.length} warrant${warrants.length === 1 ? '' : 's'}</span>

@@ -56,7 +56,7 @@
 
   function renderCards(examCard, aosCard, eventsCard){
     setCards(`
-    <a class="dashboard-card dashboard-card--selector" href="exams.html">
+    <a class="dashboard-card dashboard-card--selector" href="exams">
       <div class="dashboard-card__top">
         <span class="dashboard-card__badge ${examCard.unread ? 'dashboard-card__badge--new' : 'dashboard-card__badge--current'}">${examCard.unread ? 'NEW' : 'CURRENT'}</span>
         <span class="dashboard-card__link">Open</span>
@@ -67,7 +67,7 @@
         <div class="dashboard-card__detail"><strong>Approved to view</strong><span>${escapeHtml(examCard.approvedLabel)}</span></div>
       </div>
     </a>
-    <a class="dashboard-card dashboard-card--selector" href="aos-dashboard.html">
+    <a class="dashboard-card dashboard-card--selector" href="aos-dashboard">
       <div class="dashboard-card__top">
         <span class="dashboard-card__badge ${aosCard.unread ? 'dashboard-card__badge--new' : 'dashboard-card__badge--current'}">${aosCard.unread ? 'NEW' : 'CURRENT'}</span>
         <span class="dashboard-card__link">Open</span>
@@ -78,7 +78,7 @@
         <div class="dashboard-card__detail"><strong>Approved to view</strong><span>${escapeHtml(aosCard.approvedLabel)}</span></div>
       </div>
     </a>
-    <a class="dashboard-card dashboard-card--selector" href="event-panel.html">
+    <a class="dashboard-card dashboard-card--selector" href="event-panel">
       <div class="dashboard-card__top">
         <span class="dashboard-card__badge ${eventsCard.unread ? 'dashboard-card__badge--new' : 'dashboard-card__badge--current'}">${eventsCard.unread ? 'NEW' : 'CURRENT'}</span>
         <span class="dashboard-card__link">Open</span>
@@ -159,17 +159,17 @@
   }
 
   setCards(`
-    <a class="dashboard-card dashboard-card--selector" href="exams.html">
+    <a class="dashboard-card dashboard-card--selector" href="exams">
       <div class="dashboard-card__top"><span class="dashboard-card__badge">CURRENT</span><span class="dashboard-card__link">Open</span></div>
       <h3>Exam Dashboard</h3>
       <div class="dashboard-card__details"><div class="dashboard-card__detail"><strong>Active</strong><span>Loading...</span></div><div class="dashboard-card__detail"><strong>Approved to view</strong><span>Loading...</span></div></div>
     </a>
-    <a class="dashboard-card dashboard-card--selector" href="aos-dashboard.html">
+    <a class="dashboard-card dashboard-card--selector" href="aos-dashboard">
       <div class="dashboard-card__top"><span class="dashboard-card__badge">CURRENT</span><span class="dashboard-card__link">Open</span></div>
       <h3>AOS Dashboard</h3>
       <div class="dashboard-card__details"><div class="dashboard-card__detail"><strong>Active</strong><span>Loading...</span></div><div class="dashboard-card__detail"><strong>Approved to view</strong><span>Loading...</span></div></div>
     </a>
-    <a class="dashboard-card dashboard-card--selector" href="event-panel.html">
+    <a class="dashboard-card dashboard-card--selector" href="event-panel">
       <div class="dashboard-card__top"><span class="dashboard-card__badge">CURRENT</span><span class="dashboard-card__link">Open</span></div>
       <h3>Event Panel</h3>
       <div class="dashboard-card__details"><div class="dashboard-card__detail"><strong>Active</strong><span>Loading...</span></div><div class="dashboard-card__detail"><strong>Approved to view</strong><span>Loading...</span></div></div>

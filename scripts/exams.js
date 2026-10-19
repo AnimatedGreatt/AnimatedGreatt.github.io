@@ -55,7 +55,7 @@
     items.forEach(it=>{
       const a = document.createElement('a')
       a.className = 'dashboard-card'
-      a.href = `grade.html?session=${encodeURIComponent(it.id)}`
+      a.href = `grade?session=${encodeURIComponent(it.id)}`
       const examId = it.exam_id || it.examId || it.id
       const candidate = it.candidate_mention || it.candidate_username || it.candidateName || it.candidate_name || it.candidate || it.username || it.userId || 'Unknown candidate'
       const createdAt = formatDate(it.created_at)

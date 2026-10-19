@@ -203,7 +203,7 @@
           statusMsg.textContent = `Signed in as ${editingMe.username}#${editingMe.discriminator}. Changes saved.`
         }
         if(result.usernameChanged && result.newUsername){
-          window.location.href = `aos-profile.html?username=${encodeURIComponent(result.newUsername)}`
+          window.location.href = `aos-profile?username=${encodeURIComponent(result.newUsername)}`
           return
         }
         await loadProfile()

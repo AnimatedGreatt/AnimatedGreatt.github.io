@@ -70,7 +70,7 @@
     menu.style.zIndex = '60'
 
     const profile = document.createElement('a')
-    profile.href = '/profile.html'
+    profile.href = '/profile'
     profile.textContent = 'View profile'
     profile.className = 'btn'
     profile.style.display='block'

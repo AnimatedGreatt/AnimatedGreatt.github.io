@@ -294,16 +294,16 @@ function startApp(){
 
   app.use(async (req, res, next)=>{
     const protectedPages = new Map([
-      ['/exams.html', verifyGuildRoleAccess],
-      ['/grade.html', verifyGuildRoleAccess],
-      ['/history.html', verifyGuildRoleAccess],
-      ['/aos-dashboard.html', verifyAosRoleAccess],
-      ['/aos-profile.html', verifyAosRoleAccess],
-      ['/event-panel.html', verifyAosRoleAccess],
-      ['/event-panel', verifyAosRoleAccess],
-      ['/event-panel/', verifyAosRoleAccess]
+      ['/exams', verifyGuildRoleAccess],
+      ['/grade', verifyGuildRoleAccess],
+      ['/history', verifyGuildRoleAccess],
+      ['/aos-dashboard', verifyAosRoleAccess],
+      ['/aos-profile', verifyAosRoleAccess],
+      ['/event-panel', verifyAosRoleAccess]
     ]);
-    const verifyAccess = protectedPages.get(req.path);
+    // Pages are linked without .html, but match either form (and a trailing slash)
+    const pagePath = req.path.replace(/\/+$/, '').replace(/\.html$/i, '');
+    const verifyAccess = protectedPages.get(pagePath);
     if(!verifyAccess) return next();
     if(!req.session || !req.session.user) return res.redirect('/');
     try{
@@ -318,7 +318,7 @@ function startApp(){
     }
   });
 
-  app.use(express.static(siteRoot));
+  app.use(express.static(siteRoot, { extensions: ['html'] }));
   // Log useful startup info and check important static files
   const fs = require('fs');
   const checkFiles = [
